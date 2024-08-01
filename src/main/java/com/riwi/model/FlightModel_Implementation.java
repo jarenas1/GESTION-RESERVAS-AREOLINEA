@@ -44,7 +44,7 @@ public class FlightModel_Implementation implements IFlightModel {
             System.out.println("Vuelo añadido con exito");
             return true;
         }catch (Exception e){
-            System.out.println("No se pudo crear el usuario  "+e.getMessage());
+            System.out.println("No se pudo crear el vuelo  "+e.getMessage());
         }
         return false;
     }
