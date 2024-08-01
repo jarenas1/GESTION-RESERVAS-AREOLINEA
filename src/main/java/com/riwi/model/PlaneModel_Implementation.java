@@ -13,7 +13,8 @@ import java.util.List;
 
 public class PlaneModel_Implementation implements IPlaneModel{
 
-
+    public PlaneModel_Implementation() {
+    }
 
     @Override
     public boolean create(PlaneEntity objeto) {
@@ -45,6 +46,7 @@ public class PlaneModel_Implementation implements IPlaneModel{
         }
         return false;
     }
+
 
     //DELETE
 
@@ -134,7 +136,7 @@ public class PlaneModel_Implementation implements IPlaneModel{
         Connection con = Connect.conectar();
 
         //Query
-        String query ="SELECT * FROM flight";
+        String query ="SELECT * FROM plane";
 
         //LAUNCH
         try {
@@ -144,19 +146,21 @@ public class PlaneModel_Implementation implements IPlaneModel{
             rs = ps.executeQuery();
 
             //add the plane to the list
-            if (rs.next()){
+            while (rs.next()){
                 //creation of slyght entity for the list
                 PlaneEntity plane = new PlaneEntity(rs.getInt("capacity"),rs.getInt("id"),rs.getString("model"));
 
                 //add the plane to the list
                 planes.add(plane);
+                System.out.println("añadido");
             }
         }
-        catch (Exception e){
-            System.out.println("No se pudo traer los vuelos  "+e.getMessage());
-        }finally {
-            Connect.cerrar();
+        catch (Exception e) {
+            System.out.println("No se pudo traer los vuelos  " + e.getMessage());
         }
+       finally {
+           Connect.cerrar();
+       }
         return planes;
     }
 

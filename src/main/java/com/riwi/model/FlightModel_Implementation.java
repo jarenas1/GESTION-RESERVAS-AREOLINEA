@@ -148,7 +148,7 @@ public class FlightModel_Implementation implements IFlightModel {
             rs = ps.executeQuery();
 
             //add the fly to the list
-            if (rs.next()){
+            while (rs.next()){
                 //creation of flyght entity for the list
                 FlightEntity flyght = new FlightEntity(rs.getString("date"), rs.getNString("destination"), rs.getInt("id"), rs.getInt("id_avion"), rs.getString("date"));
 
