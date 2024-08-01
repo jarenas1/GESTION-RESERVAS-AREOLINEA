@@ -26,6 +26,13 @@ public class FlightEntity {
         this.time = time;
     }
 
+    public FlightEntity(String date, String destination, int id_avion, String time) {
+        this.date = date;
+        this.destination = destination;
+        this.id_avion = id_avion;
+        this.time = time;
+    }
+
     public String getDate() {
         return date;
     }
