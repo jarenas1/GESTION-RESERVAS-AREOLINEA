@@ -45,6 +45,8 @@ public class FlightModel_Implementation implements IFlightModel {
             return true;
         }catch (Exception e){
             System.out.println("No se pudo crear el vuelo  "+e.getMessage());
+        }finally {
+            Connect.cerrar();
         }
         return false;
     }
@@ -75,6 +77,8 @@ public class FlightModel_Implementation implements IFlightModel {
             return true;
         }catch (Exception e){
             System.out.println("No se pudo crear el usuario  "+e.getMessage());
+        }finally {
+            Connect.cerrar();
         }
         return false;
     }
@@ -115,6 +119,8 @@ public class FlightModel_Implementation implements IFlightModel {
             }
         }catch (Exception e){
             System.out.println("No se pudo traer los vuelos  "+e.getMessage());
+        }finally {
+            Connect.cerrar();
         }
         return flys;
     }
@@ -151,6 +157,8 @@ public class FlightModel_Implementation implements IFlightModel {
             }
         }catch (Exception e){
             System.out.println("No se pudo traer los vuelos  "+e.getMessage());
+        }finally {
+            Connect.cerrar();
         }
         return flys;
     }
@@ -181,6 +189,8 @@ public class FlightModel_Implementation implements IFlightModel {
             return true;
         }catch (Exception e){
             System.out.println("No se pudo actualizar el usuario "+e.getMessage());
+        }finally {
+            Connect.cerrar();
         }
         return false;
     }
