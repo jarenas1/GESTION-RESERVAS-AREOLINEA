@@ -1,0 +1,85 @@
+package com.riwi.entitie;
+
+public class ReservationEntity {
+
+    private int id;
+    private int id_passenger;
+    private int id_flight;
+    private String date; //MY SQL RECIBE 'AÑO-MES-DIA'
+    private String time; //MY SQL RECIBE 'HORA:MINS:SEGUNDOS)private Stringr
+
+    //CONSTRUCTORS
+
+
+    public ReservationEntity() {
+    }
+
+    public ReservationEntity(String date, int id, int id_passenger, int id_flight, String time) {
+        this.date = date;
+        this.id = id;
+        this.id_passenger = id_passenger;
+        this.id_flight = id_flight;
+        this.time = time;
+    }
+
+    public ReservationEntity(String date, int id_flight, int id_passenger, String time) {
+        this.date = date;
+        this.id_flight = id_flight;
+        this.id_passenger = id_passenger;
+        this.time = time;
+    }
+
+    //GETTERS AND SETTERS
+
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getId_flight() {
+        return id_flight;
+    }
+
+    public void setId_flight(int id_flight) {
+        this.id_flight = id_flight;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId_passenger() {
+        return id_passenger;
+    }
+
+    public void setId_passenger(int id_passenger) {
+        this.id_passenger = id_passenger;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "ReservationEntity{" +
+                "date='" + date + '\'' +
+                ", id=" + id +
+                ", id_passenger=" + id_passenger +
+                ", id_flight=" + id_flight +
+                ", time='" + time + '\'' +
+                '}';
+    }
+}
