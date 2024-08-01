@@ -45,7 +45,29 @@ public class PlaneModel_Implementation implements IPlaneModel{
 
     @Override
     public boolean delete(Integer identidicador) {
-     
+        //variables
+        PreparedStatement ps;
+
+        //Connection to db using the class because the method is created using the static
+        Connection con = Connect.conectar();
+
+        //Query
+        String query ="DELETE FROM flight WHERE id = ?";
+
+        //LAUNCH
+        try {
+            ps=con.prepareStatement(query);
+
+            //Insert data into query
+            ps.setInt(1,identidicador);
+
+            //execute using execute, becouse the method dont retorn anything
+            ps.execute();
+            System.out.println("Vuelo eliminado con exito");
+            return true;
+        }catch (Exception e){
+            System.out.println("No se pudo crear el usuario  "+e.getMessage());
+        }
         return false;
     }
 
