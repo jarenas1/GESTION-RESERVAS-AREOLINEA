@@ -164,6 +164,20 @@ public class PlaneModel_Implementation implements IPlaneModel{
     public boolean update(PlaneEntity objeto) {
 
         Connection connection = Connect.conectar();
+        PreparedStatement ps;
+        String query = "UPDATE plane SET model = ?, capacity = ? WHERE id = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+
+            ps.setString(1,objeto.getModel());
+            ps.setInt(2,objeto.getCapacity());
+            ps.setInt(3,objeto.getId());
+        }catch (Exception e){
+            System.out.println("No se pudo modificar el avion  "+e.getMessage());
+        }
+
+
         return false;
     }
 }
