@@ -124,8 +124,40 @@ public class PlaneModel_Implementation implements IPlaneModel{
 
     @Override
     public List<PlaneEntity> readAll() {
-        
-        return null;
+
+        //variables
+        List<PlaneEntity> planes = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs;
+
+        //Connection to db using the class because the method is created using the static
+        Connection con = Connect.conectar();
+
+        //Query
+        String query ="SELECT * FROM flight";
+
+        //LAUNCH
+        try {
+            ps=con.prepareStatement(query);
+
+            //execute using executeQuery and asign rs because the merhod return anything
+            rs = ps.executeQuery();
+
+            //add the plane to the list
+            if (rs.next()){
+                //creation of slyght entity for the list
+                PlaneEntity plane = new PlaneEntity(rs.getInt("capacity"),rs.getInt("id"),rs.getString("model"));
+
+                //add the plane to the list
+                planes.add(plane);
+            }
+        }
+        catch (Exception e){
+            System.out.println("No se pudo traer los vuelos  "+e.getMessage());
+        }finally {
+            Connect.cerrar();
+        }
+        return planes;
     }
 
     @Override
