@@ -2,7 +2,8 @@ package com.riwi.persistence.CRUD;
 
 import java.util.List;
 
-public interface Read <t>{
+public interface Read <T>{
 
-    public List<t> read (t objeto);
+    //Devuelve una lista de tipo T con los usuario que se llamaron de la database
+    public List<T> read ();
 }
