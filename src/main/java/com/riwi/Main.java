@@ -2,9 +2,11 @@ package com.riwi;
 import com.riwi.entitie.FlightEntity;
 import com.riwi.entitie.PassengerEntity;
 import com.riwi.entitie.PlaneEntity;
+import com.riwi.entitie.ReservationEntity;
 import com.riwi.model.FlightModel_Implementation;
 import com.riwi.model.PassengerModel_Implementation;
 import com.riwi.model.PlaneModel_Implementation;
+import com.riwi.model.ReservationModel_Implementation;
 import com.riwi.persistence.dbConnection.Connect;
 
 import java.sql.Connection;
@@ -54,5 +56,10 @@ public class Main {
         //PassengerEntity pe1=new PassengerEntity("10332948939",2,"Arenas Ortiz","Juan José");
 
         //nnn.update(pe1);
+
+
+        ReservationModel_Implementation rr = new ReservationModel_Implementation();
+
+        ReservationEntity reservation = new ReservationEntity()
     }
 }

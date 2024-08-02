@@ -12,13 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationModel_Implementation implements IReservationModel {
+
+
+    public ReservationModel_Implementation() {
+    }
+
     @Override
     public boolean create(ReservationEntity objeto) {
 
         Connection con = Connect.conectar();
         PreparedStatement ps;
 
-        String query = "INSERT INTO reservation (id_passenger,id_flight,`date`,seat) VALUES (?,?,?,?)";
+        String query = "INSERT INTO reservation (id_passenger,id_flight,`date`,seat,´time´) VALUES (?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(query);
@@ -27,7 +32,8 @@ public class ReservationModel_Implementation implements IReservationModel {
             ps.setInt(1,objeto.getId_passenger());
             ps.setInt(2,objeto.getId_flight());
             ps.setString(3,objeto.getDate());
-            ps.setInt(4,objeto.getSeat());
+            ps.setString(4, objeto.getTime());
+            ps.setInt(5,objeto.getSeat());
 
             ps.execute();
             return true;
@@ -39,6 +45,9 @@ public class ReservationModel_Implementation implements IReservationModel {
         }
         return false;
     }
+
+
+
 
     @Override
     public boolean delete(Integer identidicador) {
@@ -59,6 +68,9 @@ public class ReservationModel_Implementation implements IReservationModel {
         }
         return false;
     }
+
+
+
 
     @Override
     public List<ReservationEntity> read(Integer id) {
@@ -99,6 +111,10 @@ public class ReservationModel_Implementation implements IReservationModel {
         return reservations;
     }
 
+
+
+
+
     @Override
     public List<ReservationEntity> readAll() {
 
@@ -137,12 +153,15 @@ public class ReservationModel_Implementation implements IReservationModel {
     }
 
 
+
+
+
     @Override
     public boolean update(ReservationEntity objeto) {
 
         Connection connection = Connect.conectar();
         PreparedStatement ps;
-        String query = "UPDATE plane SET id_passenger = ?, id_flight = ?, ´date´ = ?, seat = ? WHERE id = ?";
+        String query = "UPDATE plane SET id_passenger = ?, id_flight = ?, ´date´ = ?, seat = ?, `time` = ? WHERE id = ?";
 
         try {
             ps = connection.prepareStatement(query);
@@ -151,7 +170,8 @@ public class ReservationModel_Implementation implements IReservationModel {
             ps.setInt(2,objeto.getId_flight());
             ps.setString(3,objeto.getDate());
             ps.setInt(4,objeto.getSeat());
-            ps.setInt(5,objeto.getId());
+            ps.setString(4,objeto.getTime());
+            ps.setInt(6,objeto.getId());
 
             ps.execute();
             return true;
