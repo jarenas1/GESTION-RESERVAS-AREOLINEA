@@ -72,6 +72,6 @@ public class Main {
 
         ReservationEntity reservationUpdate = new ReservationEntity("2024-07-02",4,2,2,12);
 
-        rr.update(reservationUpdate);
+        //rr.update(reservationUpdate);
     }
 }

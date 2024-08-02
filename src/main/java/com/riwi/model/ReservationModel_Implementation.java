@@ -160,7 +160,7 @@ public class ReservationModel_Implementation implements IReservationModel {
 
         Connection connection = Connect.conectar();
         PreparedStatement ps;
-        String query = "UPDATE reservation SET id_passenger = ?, id_flight = ?, ´date´ = ?, seat = ? WHERE id = ?";
+        String query = "UPDATE reservation SET id_passenger = ?, id_flight = ?, date = ?, seat = ? WHERE id = ?";
 
         try {
             ps = connection.prepareStatement(query);
