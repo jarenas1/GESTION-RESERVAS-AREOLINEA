@@ -8,6 +8,7 @@ import com.riwi.persistence.dbConnection.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +109,7 @@ public class PlaneModel_Implementation implements IPlaneModel{
             //add the plane to the list
             if (rs.next()){
                 //creation of slyght entity for the list
-                PlaneEntity plane = new PlaneEntity(rs.getInt("capacity"),rs.getInt("id"),rs.getString("model"));
+                PlaneEntity plane = getPlane(rs);
 
                 //add the plane to the list
                 planes.add(plane);
@@ -148,7 +149,7 @@ public class PlaneModel_Implementation implements IPlaneModel{
             //add the plane to the list
             while (rs.next()){
                 //creation of slyght entity for the list
-                PlaneEntity plane = new PlaneEntity(rs.getInt("capacity"),rs.getInt("id"),rs.getString("model"));
+                PlaneEntity plane = getPlane(rs);
 
                 //add the plane to the list
                 planes.add(plane);
@@ -177,11 +178,18 @@ public class PlaneModel_Implementation implements IPlaneModel{
             ps.setString(1,objeto.getModel());
             ps.setInt(2,objeto.getCapacity());
             ps.setInt(3,objeto.getId());
+
+            ps.execute();
+            return true;
         }catch (Exception e){
             System.out.println("No se pudo modificar el avion  "+e.getMessage());
         }
 
 
         return false;
+    }
+
+    private static PlaneEntity getPlane(ResultSet rs) throws SQLException {
+        return new PlaneEntity(rs.getInt("capacity"), rs.getInt("id"), rs.getString("model"));
     }
 }

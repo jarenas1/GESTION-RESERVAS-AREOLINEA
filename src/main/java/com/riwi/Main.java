@@ -29,9 +29,12 @@ public class Main {
 
         PlaneModel_Implementation pp = new PlaneModel_Implementation();
 
-        PlaneEntity plane = new PlaneEntity(12,"boeing 747");
+        PlaneEntity plane = new PlaneEntity(212,"boeing 747");
         //pp.create(plane);
         //System.out.println(pp.read(2));
         //System.out.println(pp.readAll());
+
+        PlaneEntity planeToUpdate = new PlaneEntity(212, 2, "boeing 999");
+        pp.update(planeToUpdate);
     }
 }

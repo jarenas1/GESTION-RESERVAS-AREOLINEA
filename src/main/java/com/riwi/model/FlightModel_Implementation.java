@@ -149,11 +149,11 @@ public class FlightModel_Implementation implements IFlightModel {
 
             //add the fly to the list
             while (rs.next()){
-                //creation of flyght entity for the list
-                FlightEntity flyght = new FlightEntity(rs.getString("date"), rs.getNString("destination"), rs.getInt("id"), rs.getInt("id_avion"), rs.getString("date"));
+                //creation of flight entity for the list
+                FlightEntity flight = new FlightEntity(rs.getString("date"), rs.getNString("destination"), rs.getInt("id"), rs.getInt("id_avion"), rs.getString("date"));
 
-                //add the flyght to the list
-                flys.add(flyght);
+                //add the flight to the list
+                flys.add(flight);
             }
         }catch (Exception e){
             System.out.println("No se pudo traer los vuelos  "+e.getMessage());
