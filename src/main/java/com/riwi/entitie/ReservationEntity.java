@@ -14,21 +14,19 @@ public class ReservationEntity {
     public ReservationEntity() {
     }
 
-    public ReservationEntity(String date, int id, int id_flight, int id_passenger, int seat, String time) {
+    public ReservationEntity(String date, int id, int id_flight, int id_passenger, int seat) {
         this.date = date;
         this.id = id;
         this.id_flight = id_flight;
         this.id_passenger = id_passenger;
         this.seat = seat;
-        this.time = time;
     }
 
-    public ReservationEntity(String date, int id_flight, int id_passenger, int seat, String time) {
+    public ReservationEntity(String date, int id_flight, int id_passenger, int seat) {
         this.date = date;
         this.id_flight = id_flight;
         this.id_passenger = id_passenger;
         this.seat = seat;
-        this.time = time;
     }
 
 

@@ -60,6 +60,8 @@ public class Main {
 
         ReservationModel_Implementation rr = new ReservationModel_Implementation();
 
-        ReservationEntity reservation = new ReservationEntity()
+        ReservationEntity reservation = new ReservationEntity("2024-07-02",2,2,1);
+
+        rr.create(reservation);
     }
 }

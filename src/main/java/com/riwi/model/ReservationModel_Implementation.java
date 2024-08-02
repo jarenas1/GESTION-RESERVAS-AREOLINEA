@@ -23,7 +23,7 @@ public class ReservationModel_Implementation implements IReservationModel {
         Connection con = Connect.conectar();
         PreparedStatement ps;
 
-        String query = "INSERT INTO reservation (id_passenger,id_flight,`date`,seat,´time´) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO reservation (id_passenger,id_flight,`date`,seat) VALUES (?,?,?,?)";
 
         try {
             ps = con.prepareStatement(query);
@@ -32,14 +32,13 @@ public class ReservationModel_Implementation implements IReservationModel {
             ps.setInt(1,objeto.getId_passenger());
             ps.setInt(2,objeto.getId_flight());
             ps.setString(3,objeto.getDate());
-            ps.setString(4, objeto.getTime());
-            ps.setInt(5,objeto.getSeat());
+            ps.setInt(4,objeto.getSeat());
 
             ps.execute();
             return true;
 
         }catch (Exception e){
-            System.out.println("No se pudo crear la reserva");
+            System.out.println("No se pudo crear la reserva  "+e.getMessage());
         }finally {
             Connect.cerrar();
         }
@@ -98,7 +97,7 @@ public class ReservationModel_Implementation implements IReservationModel {
             //add the plane to the list
             if (rs.next()){
                 //creation of slyght entity for the list
-                ReservationEntity reservation = new ReservationEntity(rs.getString("date"), rs.getInt("id_flight"), rs.getInt("id_passenger"), rs.getInt("seat"),rs.getString("time"));
+                ReservationEntity reservation = new ReservationEntity(rs.getString("date"), rs.getInt("id_flight"), rs.getInt("id_passenger"), rs.getInt("seat"));
 
                 //add the plane to the list
                 reservations.add(reservation);
@@ -139,7 +138,7 @@ public class ReservationModel_Implementation implements IReservationModel {
             //add the plane to the list
             if (rs.next()){
                 //creation of slyght entity for the list
-                ReservationEntity reservation = new ReservationEntity(rs.getString("date"), rs.getInt("id"), rs.getInt("id_flight"), rs.getInt("id_passenger"), rs.getInt("seat"),rs.getString("time"));
+                ReservationEntity reservation = new ReservationEntity(rs.getString("date"), rs.getInt("id"), rs.getInt("id_flight"), rs.getInt("id_passenger"), rs.getInt("seat"));
 
                 //add the plane to the list
                 reservations.add(reservation);
@@ -161,7 +160,7 @@ public class ReservationModel_Implementation implements IReservationModel {
 
         Connection connection = Connect.conectar();
         PreparedStatement ps;
-        String query = "UPDATE plane SET id_passenger = ?, id_flight = ?, ´date´ = ?, seat = ?, `time` = ? WHERE id = ?";
+        String query = "UPDATE plane SET id_passenger = ?, id_flight = ?, ´date´ = ?, seat = ? WHERE id = ?";
 
         try {
             ps = connection.prepareStatement(query);
@@ -170,8 +169,7 @@ public class ReservationModel_Implementation implements IReservationModel {
             ps.setInt(2,objeto.getId_flight());
             ps.setString(3,objeto.getDate());
             ps.setInt(4,objeto.getSeat());
-            ps.setString(4,objeto.getTime());
-            ps.setInt(6,objeto.getId());
+            ps.setInt(5,objeto.getId());
 
             ps.execute();
             return true;
