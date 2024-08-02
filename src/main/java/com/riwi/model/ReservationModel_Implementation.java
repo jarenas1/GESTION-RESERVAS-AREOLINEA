@@ -40,7 +40,20 @@ public class ReservationModel_Implementation implements IReservationModel {
     @Override
     public boolean delete(Integer identidicador) {
 
-       
+        Connection connection = Connect.conectar();
+        PreparedStatement ps;
+        String query = "DELETE FROM reservation WHERE id = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+
+            ps.setInt(1,identidicador);
+
+            ps.execute();
+            return true;
+        }catch (Exception e){
+            System.out.println("No se pudo eliminar el avion");
+        }
         return false;
     }
 
