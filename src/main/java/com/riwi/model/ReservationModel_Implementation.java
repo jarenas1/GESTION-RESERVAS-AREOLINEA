@@ -136,7 +136,7 @@ public class ReservationModel_Implementation implements IReservationModel {
             rs = ps.executeQuery();
 
             //add the plane to the list
-            if (rs.next()){
+            while (rs.next()){
                 //creation of slyght entity for the list
                 ReservationEntity reservation = new ReservationEntity(rs.getString("date"), rs.getInt("id"), rs.getInt("id_flight"), rs.getInt("id_passenger"), rs.getInt("seat"));
 
@@ -160,7 +160,7 @@ public class ReservationModel_Implementation implements IReservationModel {
 
         Connection connection = Connect.conectar();
         PreparedStatement ps;
-        String query = "UPDATE plane SET id_passenger = ?, id_flight = ?, ´date´ = ?, seat = ? WHERE id = ?";
+        String query = "UPDATE reservation SET id_passenger = ?, id_flight = ?, ´date´ = ?, seat = ? WHERE id = ?";
 
         try {
             ps = connection.prepareStatement(query);
