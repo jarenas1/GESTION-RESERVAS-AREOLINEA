@@ -1,0 +1,228 @@
+warning: in the working copy of 'src/main/java/com/riwi/Main.java', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/src/main/java/com/riwi/Main.java b/src/main/java/com/riwi/Main.java[m
+[1mindex 65cf9cd..4be10db 100644[m
+[1m--- a/src/main/java/com/riwi/Main.java[m
+[1m+++ b/src/main/java/com/riwi/Main.java[m
+[36m@@ -1,7 +1,10 @@[m
+ package com.riwi;[m
+[32m+[m[32mimport com.riwi.persistence.dbConnection.Connect;[m
+[32m+[m
+[32m+[m[32mimport java.sql.Connection;[m
+ [m
+ public class Main {[m
+     public static void main(String[] args) {[m
+[31m-        System.out.println("Hello world!");[m
+[32m+[m
+     }[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main/java/com/riwi/model/FlightModel_Implementation.java b/src/main/java/com/riwi/model/FlightModel_Implementation.java[m
+[1mindex 556b19c..85013f5 100644[m
+[1m--- a/src/main/java/com/riwi/model/FlightModel_Implementation.java[m
+[1m+++ b/src/main/java/com/riwi/model/FlightModel_Implementation.java[m
+[36m@@ -3,28 +3,154 @@[m [mpackage com.riwi.model;[m
+ import com.riwi.entitie.FlightEntity;[m
+ import com.riwi.entitie.PlaneEntity;[m
+ import com.riwi.persistence.IModel.IFlightModel;[m
+[32m+[m[32mimport com.riwi.persistence.dbConnection.Connect;[m
+ [m
+[32m+[m
+[32m+[m[32mimport java.sql.Connection;[m
+[32m+[m[32mimport java.sql.PreparedStatement;[m
+[32m+[m[32mimport java.sql.ResultSet;[m
+[32m+[m[32mimport java.util.ArrayList;[m
+ import java.util.List;[m
+ [m
+ public class FlightModel_Implementation implements IFlightModel {[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    //CREATE FLIGHT[m
+     @Override[m
+     public boolean create(FlightEntity objeto) {[m
+[32m+[m[32m        //variables[m
+[32m+[m[32m        PreparedStatement ps;[m
+[32m+[m
+[32m+[m[32m        //Connection to db using the class because the method is created using the static[m
+[32m+[m[32m        Connection con = Connect.conectar();[m
+[32m+[m
+[32m+[m[32m        //Query[m
+[32m+[m[32m        String query ="INSERT INTO flight (destination,date,time,id_avion) VALUES(?,?,?,?)";[m
+[32m+[m
+[32m+[m[32m        //LAUNCH[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            ps=con.prepareStatement(query);[m
+[32m+[m
+[32m+[m[32m            //Insert data into query[m
+[32m+[m[32m            ps.setString(1,objeto.getDestination());[m
+[32m+[m[32m            ps.setString(2,objeto.getDate());[m
+[32m+[m[32m            ps.setString(3,objeto.getTime());[m
+[32m+[m[32m            ps.setInt(4,objeto.getId_avion());[m
+[32m+[m
+[32m+[m[32m            //execute using execute, becouse the method dont retorn anything[m
+[32m+[m[32m            ps.execute();[m
+[32m+[m[32m            System.out.println("Vuelo añadido con exito");[m
+[32m+[m[32m            return true;[m
+[32m+[m[32m        }catch (Exception e){[m
+[32m+[m[32m            System.out.println("No se pudo crear el usuario  "+e.getMessage());[m
+[32m+[m[32m        }[m
+         return false;[m
+     }[m
+ [m
+[32m+[m
+[32m+[m[32m    //DELETE FLIGHT[m
+     @Override[m
+     public boolean delete(Integer identidicador) {[m
+[32m+[m[32m        //variables[m
+[32m+[m[32m        PreparedStatement ps;[m
+[32m+[m
+[32m+[m[32m        //Connection to db using the class because the method is created using the static[m
+[32m+[m[32m        Connection con = Connect.conectar();[m
+[32m+[m
+[32m+[m[32m        //Query[m
+[32m+[m[32m        String query ="DELETE FROM flight WHERE id = ?";[m
+[32m+[m
+[32m+[m[32m        //LAUNCH[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            ps=con.prepareStatement(query);[m
+[32m+[m
+[32m+[m[32m            //Insert data into query[m
+[32m+[m[32m            ps.setInt(1,identidicador);[m
+[32m+[m
+[32m+[m[32m            //execute using execute, becouse the method dont retorn anything[m
+[32m+[m[32m            ps.execute();[m
+[32m+[m[32m            System.out.println("Vuelo eliminado con exito");[m
+[32m+[m[32m            return true;[m
+[32m+[m[32m        }catch (Exception e){[m
+[32m+[m[32m            System.out.println("No se pudo crear el usuario  "+e.getMessage());[m
+[32m+[m[32m        }[m
+         return false;[m
+     }[m
+ [m
+[32m+[m
+[32m+[m[32m    //LIST FLIGHTS[m
+     @Override[m
+[31m-    public List<PlaneEntity> read(String dato) {[m
+[31m-        return List.of();[m
+[32m+[m[32m    public List<FlightEntity> read(String destino) {[m
+[32m+[m
+[32m+[m[32m        //variables[m
+[32m+[m[32m        List<FlightEntity> flys = new ArrayList<>();[m
+[32m+[m[32m        PreparedStatement ps;[m
+[32m+[m[32m        ResultSet rs;[m
+[32m+[m
+[32m+[m[32m        //Connection to db using the class because the method is created using the static[m
+[32m+[m[32m        Connection con = Connect.conectar();[m
+[32m+[m
+[32m+[m[32m        //Query[m
+[32m+[m[32m        String query ="SELECT * FROM flight WHERE destination = ?";[m
+[32m+[m
+[32m+[m[32m        //LAUNCH[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            ps=con.prepareStatement(query);[m
+[32m+[m
+[32m+[m[32m            //Insert data into query[m
+[32m+[m[32m            ps.setString(1,destino);[m
+[32m+[m
+[32m+[m[32m            //execute using executeQuery and asign rs because the merhod return anything[m
+[32m+[m[32m            rs = ps.executeQuery();[m
+[32m+[m
+[32m+[m[32m            //add the fly to the list[m
+[32m+[m[32m            if (rs.next()){[m
+[32m+[m[32m                //creation of slyght entity for the list[m
+[32m+[m[32m                FlightEntity flyght = new FlightEntity(rs.getNString("date"), rs.getNString("destination"), rs.getInt("id"), rs.getInt("id_avion"), rs.getString("date"));[m
+[32m+[m
+[32m+[m[32m                //add the flyght to the list[m
+[32m+[m[32m                flys.add(flyght);[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }catch (Exception e){[m
+[32m+[m[32m            System.out.println("No se pudo traer los vuelos  "+e.getMessage());[m
+[32m+[m[32m        }[m
+[32m+[m[32m        return flys;[m
+     }[m
+ [m
+[32m+[m
+[32m+[m[32m    //READ ALL FLIGHTS[m
+     @Override[m
+     public List<FlightEntity> readAll() {[m
+[31m-        return List.of();[m
+[32m+[m[32m        //variables[m
+[32m+[m[32m        List<FlightEntity> flys = new ArrayList<>();[m
+[32m+[m[32m        PreparedStatement ps;[m
+[32m+[m[32m        ResultSet rs;[m
+[32m+[m
+[32m+[m[32m        //Connection to db using the class because the method is created using the static[m
+[32m+[m[32m        Connection con = Connect.conectar();[m
+[32m+[m
+[32m+[m[32m        //Query[m
+[32m+[m[32m        String query ="SELECT * FROM flight";[m
+[32m+[m
+[32m+[m[32m        //LAUNCH[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            ps=con.prepareStatement(query);[m
+[32m+[m
+[32m+[m[32m            //execute using executeQuery and asign rs because the merhod return anything[m
+[32m+[m[32m            rs = ps.executeQuery();[m
+[32m+[m
+[32m+[m[32m            //add the fly to the list[m
+[32m+[m[32m            if (rs.next()){[m
+[32m+[m[32m                //creation of flyght entity for the list[m
+[32m+[m[32m                FlightEntity flyght = new FlightEntity(rs.getNString("date"), rs.getNString("destination"), rs.getInt("id"), rs.getInt("id_avion"), rs.getString("date"));[m
+[32m+[m
+[32m+[m[32m                //add the flyght to the list[m
+[32m+[m[32m                flys.add(flyght);[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }catch (Exception e){[m
+[32m+[m[32m            System.out.println("No se pudo traer los vuelos  "+e.getMessage());[m
+[32m+[m[32m        }[m
+[32m+[m[32m        return flys;[m
+     }[m
+ [m
+     @Override[m
+[1mdiff --git a/src/main/java/com/riwi/persistence/IModel/IFlightModel.java b/src/main/java/com/riwi/persistence/IModel/IFlightModel.java[m
+[1mindex c459659..4c14e92 100644[m
+[1m--- a/src/main/java/com/riwi/persistence/IModel/IFlightModel.java[m
+[1m+++ b/src/main/java/com/riwi/persistence/IModel/IFlightModel.java[m
+[36m@@ -5,5 +5,5 @@[m [mimport com.riwi.entitie.PlaneEntity;[m
+ import com.riwi.persistence.CRUD.*;[m
+ [m
+ //IMPLEMENTAMOS TODOS LOS METODOS QUE VA A TENER EL VUELO[m
+[31m-public interface IFlightModel extends Create<FlightEntity>, Delete<Integer>, Update<FlightEntity>, Read<String, PlaneEntity>, ReadAll<FlightEntity> {[m
+[32m+[m[32mpublic interface IFlightModel extends Create<FlightEntity>, Delete<Integer>, Update<FlightEntity>, Read<String, FlightEntity>, ReadAll<FlightEntity> {[m
+ }[m
+[1mdiff --git a/src/main/java/com/riwi/persistence/dbConnection/Connect.java b/src/main/java/com/riwi/persistence/dbConnection/Connect.java[m
+[1mindex 5e18f47..75da5a7 100644[m
+[1m--- a/src/main/java/com/riwi/persistence/dbConnection/Connect.java[m
+[1m+++ b/src/main/java/com/riwi/persistence/dbConnection/Connect.java[m
+[36m@@ -3,13 +3,14 @@[m [mpackage com.riwi.persistence.dbConnection;[m
+ import java.sql.Connection;[m
+ import java.sql.DriverManager;[m
+ [m
+[31m-public class mysqlConfig {[m
+[32m+[m[32mpublic class Connect {[m
+ [m
+[31m-    static Connection connection = null;[m
+[32m+[m
+[32m+[m[32m    public static java.sql.Connection connection = null;[m
+ [m
+     //ABRIR CONECCION CON LA DATABASE[m
+ [m
+[31m-    static Connection conectar(){[m
+[32m+[m[32m    public static java.sql.Connection conectar(){[m
+             //CREAMOS LAS VARIABLES NECESARIAS PARA LA CONECCION  "jdbc:mysql://host:port/nombre";[m
+ [m
+             String URL = "jdbc:mysql://btiefdm5la9eg8hg4ixv-mysql.services.clever-cloud.com:3306/btiefdm5la9eg8hg4ixv";[m
+[36m@@ -31,12 +32,13 @@[m [mpublic class mysqlConfig {[m
+ [m
+         //CERRAR CONECCION[m
+ [m
+[31m-        public void cerrar(){[m
+[32m+[m[32m        public static void cerrar(){[m
+ [m
+         if (connection != null){[m
+ [m
+             //INTENTAMOS CERRAR LA CONECCION[m
+             try {[m
+[32m+[m[32m                System.out.println("cerrada");[m
+                 connection.close();[m
+             }catch (Exception e){[m
+                 System.out.println("La coneccion con la base de datos no se pudo cerrar "+e.getMessage());[m
