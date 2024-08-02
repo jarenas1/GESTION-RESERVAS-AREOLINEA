@@ -8,7 +8,7 @@ import java.util.List;
 public class PassengerController {
 
     //CREAMOS UNA INSTANCIA DE LA INTERFAZ DE PASAJERO
-    private IPassengerModel passengerModel;
+    private final IPassengerModel passengerModel;
 
     //ASIGNAMOS ESA INSTANCIA A UN PASSENGERCONTROLLER PARA PODER LLAMARLO POR FUERA Y QUE SEA AMS SEGURO EL CODIGO
     public PassengerController (IPassengerModel passengerModel){
