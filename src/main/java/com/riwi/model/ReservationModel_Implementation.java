@@ -1,11 +1,14 @@
 package com.riwi.model;
 
+import com.riwi.entitie.PlaneEntity;
 import com.riwi.entitie.ReservationEntity;
 import com.riwi.persistence.IModel.IReservationModel;
 import com.riwi.persistence.dbConnection.Connect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationModel_Implementation implements IReservationModel {
@@ -58,8 +61,42 @@ public class ReservationModel_Implementation implements IReservationModel {
     }
 
     @Override
-    public List<ReservationEntity> read(Integer dato) {
-        return List.of();
+    public List<ReservationEntity> read(Integer id) {
+        //variables
+        List<ReservationEntity> reservations = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs;
+
+        //Connection to db using the class because the method is created using the static
+        Connection con = Connect.conectar();
+
+        //Query
+        String query ="SELECT * FROM reservation WHERE id = ?";
+
+        //LAUNCH
+        try {
+            ps=con.prepareStatement(query);
+
+            //Insert data into query
+            ps.setInt(1,id);
+
+            //execute using executeQuery and asign rs because the merhod return anything
+            rs = ps.executeQuery();
+
+            //add the plane to the list
+            if (rs.next()){
+                //creation of slyght entity for the list
+                ReservationEntity reservation = new ReservationEntity(rs.getString("date"), rs.getInt("id_flight"), rs.getInt("id_passenger"), rs.getInt("seat"),rs.getString("time"));
+
+                //add the plane to the list
+                reservations.add(reservation);
+            }
+        }catch (Exception e){
+            System.out.println("No se pudieron traer las reservas  "+e.getMessage());
+        }finally {
+            Connect.cerrar();
+        }
+        return reservations;
     }
 
     @Override

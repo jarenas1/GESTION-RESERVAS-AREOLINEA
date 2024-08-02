@@ -31,6 +31,8 @@ public class ReservationEntity {
         this.time = time;
     }
 
+
+
     //GETTERS AND SETTERS
 
 
