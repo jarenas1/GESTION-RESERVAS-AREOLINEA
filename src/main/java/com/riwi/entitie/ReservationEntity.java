@@ -34,6 +34,14 @@ public class ReservationEntity {
     //GETTERS AND SETTERS
 
 
+    public int getSeat() {
+        return seat;
+    }
+
+    public void setSeat(int seat) {
+        this.seat = seat;
+    }
+
     public String getDate() {
         return date;
     }
