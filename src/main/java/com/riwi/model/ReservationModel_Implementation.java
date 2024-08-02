@@ -137,4 +137,29 @@ public class ReservationModel_Implementation implements IReservationModel {
     }
 
 
+    @Override
+    public boolean update(ReservationEntity objeto) {
+
+        Connection connection = Connect.conectar();
+        PreparedStatement ps;
+        String query = "UPDATE plane SET id_passenger = ?, id_flight = ?, ´date´ = ?, seat = ? WHERE id = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+
+            ps.setInt(1, objeto.getId_passenger());
+            ps.setInt(2,objeto.getId_flight());
+            ps.setString(3,objeto.getDate());
+            ps.setInt(4,objeto.getSeat());
+            ps.setInt(5,objeto.getId());
+
+            ps.execute();
+            return true;
+        }catch (Exception e){
+            System.out.println("No se pudo modificar el avion  "+e.getMessage());
+        }
+
+
+        return false;
+    }
 }

@@ -189,6 +189,7 @@ public class PlaneModel_Implementation implements IPlaneModel{
         return false;
     }
 
+    //SE CREO ESTE METODO PARA ASIGNAR EN LOS METODOS DE READ Y READ ALL (recomendacion de Santiago)
     private static PlaneEntity getPlane(ResultSet rs) throws SQLException {
         return new PlaneEntity(rs.getInt("capacity"), rs.getInt("id"), rs.getString("model"));
     }
