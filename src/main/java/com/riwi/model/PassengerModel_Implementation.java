@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PassengerModel_Implementation implements IPassengerModel {
+
+    public PassengerModel_Implementation() {
+    }
+
     @Override
     public boolean create(PassengerEntity objeto) {
 
@@ -45,6 +49,10 @@ public class PassengerModel_Implementation implements IPassengerModel {
         return false;
     }
 
+
+
+
+
     @Override
     public boolean delete(Integer identidicador) {
         //variables
@@ -74,6 +82,10 @@ public class PassengerModel_Implementation implements IPassengerModel {
         }
         return false;
     }
+
+
+
+
 
     @Override
     public List<PassengerEntity> read(Integer id) {
@@ -107,12 +119,16 @@ public class PassengerModel_Implementation implements IPassengerModel {
                 passengers.add(passenger);
             }
         }catch (Exception e){
-            System.out.println("No se pudo traer los vuelos  "+e.getMessage());
+            System.out.println("No se pudo traer los pasajeros  "+e.getMessage());
         }finally {
             Connect.cerrar();
         }
         return passengers;
     }
+
+
+
+
 
     @Override
     public List<PassengerEntity> readAll() {
@@ -140,6 +156,9 @@ public class PassengerModel_Implementation implements IPassengerModel {
         return passengers;
     }
 
+
+
+
     @Override
     public boolean update(PassengerEntity objeto) {
 
@@ -163,10 +182,10 @@ public class PassengerModel_Implementation implements IPassengerModel {
 
             //execute using execute, becouse the method dont retorn anything
             ps.execute();
-            System.out.println("pasajero añadido con exito");
+            System.out.println("pasajero modificar con exito");
             return true;
         }catch (Exception e){
-            System.out.println("No se pudo crear el pasajero  "+e.getMessage());
+            System.out.println("No se pudo modificar el pasajero  "+e.getMessage());
         }finally {
             Connect.cerrar();
         }

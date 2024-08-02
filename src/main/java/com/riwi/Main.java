@@ -1,7 +1,9 @@
 package com.riwi;
 import com.riwi.entitie.FlightEntity;
+import com.riwi.entitie.PassengerEntity;
 import com.riwi.entitie.PlaneEntity;
 import com.riwi.model.FlightModel_Implementation;
+import com.riwi.model.PassengerModel_Implementation;
 import com.riwi.model.PlaneModel_Implementation;
 import com.riwi.persistence.dbConnection.Connect;
 
@@ -35,6 +37,22 @@ public class Main {
         //System.out.println(pp.readAll());
 
         PlaneEntity planeToUpdate = new PlaneEntity(212, 2, "boeing 999");
-        pp.update(planeToUpdate);
+        //pp.update(planeToUpdate);
+
+        PassengerEntity pe=new PassengerEntity("10332948939","Arenas","Juan José");
+
+        PassengerModel_Implementation nnn = new PassengerModel_Implementation();
+
+        //nnn.create(pe);
+
+        //nnn.delete(1);
+
+        //System.out.println(nnn.read(2));
+
+        //System.out.println(nnn.readAll());
+
+        //PassengerEntity pe1=new PassengerEntity("10332948939",2,"Arenas Ortiz","Juan José");
+
+        //nnn.update(pe1);
     }
 }
