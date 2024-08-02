@@ -3,6 +3,8 @@ package com.riwi.controller;
 import com.riwi.entitie.PassengerEntity;
 import com.riwi.persistence.IModel.IPassengerModel;
 
+import java.util.List;
+
 public class PassengerController {
 
     //CREAMOS UNA INSTANCIA DE LA INTERFAZ DE PASAJERO
@@ -17,6 +19,21 @@ public class PassengerController {
 
         //POR MEDIO DE LA INSTANCIA CREADA POR FUERA LLAMAMOS EL METODO, EN EL CUAL CREAMOS UN CONSTRUCTOR CON LOS PARAMETROS DE ARRIBA PARA QIE CREE UNA INSTANCIA Y SE INTRODUZCA AL METODO
         return this.passengerModel.create(new PassengerEntity(document,lastName,name));
+    }
 
+    public boolean delete(int id){
+        return this.passengerModel.delete(id);
+    }
+
+    public List<PassengerEntity> read(int id){
+        return this.passengerModel.read(id);
+    }
+
+    public List<PassengerEntity> readAll(){
+        return this.passengerModel.readAll();
+    }
+
+    public boolean update (String document, int id,String lastName, String name){
+        return this.passengerModel.update(new PassengerEntity(document,id,lastName,name));
     }
 }
