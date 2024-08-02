@@ -1,4 +1,6 @@
 package com.riwi;
+import com.riwi.controller.FlightController;
+import com.riwi.controller.PassengerController;
 import com.riwi.entitie.FlightEntity;
 import com.riwi.entitie.PassengerEntity;
 import com.riwi.entitie.PlaneEntity;
@@ -15,6 +17,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+
+        //####################################################  PRUEBAS  ########################################################################
         FlightEntity flight = new FlightEntity("2024-08-01","ITALIA", 2, 1,"18:00:00");
 
         FlightModel_Implementation aa = new FlightModel_Implementation();
@@ -73,5 +77,17 @@ public class Main {
         ReservationEntity reservationUpdate = new ReservationEntity("2024-07-02",4,2,2,12);
 
         //rr.update(reservationUpdate);
+        //####################################################  PRUEBAS  ########################################################################
+
+
+        //FLIGHT
+
+        FlightController flightController = new FlightController();
+
+        flightController.create("2020-01-09","Bogota", 1,"18:00:00");
+
+        PassengerController passengerController = new PassengerController();
+
+        passengerController.readAll();
     }
 }

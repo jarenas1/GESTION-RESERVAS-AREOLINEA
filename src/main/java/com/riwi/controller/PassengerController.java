@@ -1,6 +1,7 @@
 package com.riwi.controller;
 
 import com.riwi.entitie.PassengerEntity;
+import com.riwi.model.PassengerModel_Implementation;
 import com.riwi.persistence.IModel.IPassengerModel;
 
 import java.util.List;
@@ -11,8 +12,8 @@ public class PassengerController {
     private final IPassengerModel passengerModel;
 
     //ASIGNAMOS ESA INSTANCIA A UN PASSENGERCONTROLLER PARA PODER LLAMARLO POR FUERA Y QUE SEA AMS SEGURO EL CODIGO
-    public PassengerController (IPassengerModel passengerModel){
-        this.passengerModel = passengerModel;
+    public PassengerController (){
+        this.passengerModel = new PassengerModel_Implementation();
     }
     //VA A RECIBIR LOS DATOS PARA LA CREACION DE UN PASAJERO, LUEGO CON ESTOS DATOS CREA UN PASAJERO POR MEDIO DE UN CONSTRUCTOR Y SE LO PASA AL METODO DE CREAR
     public boolean create(String document, String lastName, String name){
