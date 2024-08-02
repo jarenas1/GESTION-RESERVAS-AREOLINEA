@@ -64,6 +64,8 @@ public class ReservationModel_Implementation implements IReservationModel {
             return true;
         }catch (Exception e){
             System.out.println("No se pudo eliminar el avion");
+        }finally {
+            Connect.cerrar();
         }
         return false;
     }
@@ -175,9 +177,9 @@ public class ReservationModel_Implementation implements IReservationModel {
             return true;
         }catch (Exception e){
             System.out.println("No se pudo modificar el avion  "+e.getMessage());
+        }finally {
+            Connect.cerrar();
         }
-
-
         return false;
     }
 }
