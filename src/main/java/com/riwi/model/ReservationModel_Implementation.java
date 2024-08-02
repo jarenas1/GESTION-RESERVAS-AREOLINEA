@@ -15,7 +15,20 @@ public class ReservationModel_Implementation implements IReservationModel {
         Connection con = Connect.conectar();
         PreparedStatement ps;
 
-        String query = "INSERT INTO reservation (id_passenger,id_flight,date,seat)";
+        String query = "INSERT INTO reservation (id_passenger,id_flight,`date`,seat) VALUES (?,?,?,?)";
+
+        try {
+            ps = con.prepareStatement(query);
+
+            //set values
+            ps.setInt(1,objeto.getId_passenger());
+            ps.setInt(2,objeto.getId_flight());
+            ps.setString(3,objeto.getDate());
+            ps.setString(4,objeto.getS);
+
+        }catch (Exception e){
+            System.out.println("No se pudo crear la reserva");
+        }
         return false;
     }
 

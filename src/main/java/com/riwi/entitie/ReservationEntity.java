@@ -7,25 +7,27 @@ public class ReservationEntity {
     private int id_flight;
     private String date; //MY SQL RECIBE 'AÑO-MES-DIA'
     private String time; //MY SQL RECIBE 'HORA:MINS:SEGUNDOS)private Stringr
-
+    private int seat;
     //CONSTRUCTORS
 
 
     public ReservationEntity() {
     }
 
-    public ReservationEntity(String date, int id, int id_passenger, int id_flight, String time) {
+    public ReservationEntity(String date, int id, int id_flight, int id_passenger, int seat, String time) {
         this.date = date;
         this.id = id;
-        this.id_passenger = id_passenger;
         this.id_flight = id_flight;
+        this.id_passenger = id_passenger;
+        this.seat = seat;
         this.time = time;
     }
 
-    public ReservationEntity(String date, int id_flight, int id_passenger, String time) {
+    public ReservationEntity(String date, int id_flight, int id_passenger, int seat, String time) {
         this.date = date;
         this.id_flight = id_flight;
         this.id_passenger = id_passenger;
+        this.seat = seat;
         this.time = time;
     }
 
